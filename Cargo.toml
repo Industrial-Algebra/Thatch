@@ -1,0 +1,18 @@
+[package]
+name = "thatch"
+version = "0.0.1" # pre-ideation scaffold — bump before first release
+edition = "2021"
+rust-version = "1.75"
+license = "Apache-2.0"
+description = "Geometry of the edge — the infinitesimal boundary between something and emptiness"
+repository = "https://github.com/Industrial-Algebra/Thatch"
+keywords = ["mathematics", "geometry", "combinatorics", "log-geometry"]
+categories = ["mathematics", "science"]
+
+[features]
+default = ["std"]
+std = []
+
+[dependencies]
+
+[dev-dependencies]
