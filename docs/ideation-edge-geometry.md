@@ -5,6 +5,14 @@
 > results. Established mathematics is stated as fact and sourced; everything
 > conjectural is marked as such.
 >
+> **Revision 2 (2026-08-21):** reconciled with the founding dive
+> (IA-documents, `RABBIT_HOLE_2026-08-20_Thatch.md`). Changes: a fifth
+> in-stack edge recorded (Schubert's time-axis grant-expiry cliff) and
+> probe **S4** added (§7); the two-sided meeting restated as four-sided
+> (§1 addendum); §4 sharpened to the one-object-or-four question; probe
+> sequencing by consumer pull (§7); the conversation-vs-crate endgame
+> recorded (§5).
+>
 > **Author:** Justin Elliott Cobb, Industrial Algebra
 > **Date:** 2026-08-20
 > **Project:** Thatch — named for Edward Teach/Thatch, Blackbeard, whose
@@ -32,6 +40,16 @@ at the same question, viewed from two sides:
   is load-bearing.
 
 Both stop at the boundary. Neither says what the boundary *is*.
+
+**Revision 2 addendum — four sides, not two.** The meeting is larger than
+two-sided. Karpal's Phase 16 topos work is building Ω into a **subobject
+classifier** — in topos theory, precisely the categorical interface between
+a subobject and its complement — and Quantizon's gluing-failure table is
+**descent**: whether local boundary data composes to global data. The stack
+approaches the edge from four sides, one of which (the topos) is already
+far along building the general object. The honest restatement of §4: is
+Thatch's "third column" a sibling of these, or a stratified, ε-thickened
+*instance* of the classifier geometry?
 
 **The thesis of Thatch: the infinitesimal boundary between something and
 emptiness (or a singularity) is itself a geometric object** — it has strata,
@@ -89,6 +107,13 @@ phase diagrams are **additive** — walls are per-capability. Any *genuine*
 non-additivity must come from interaction — i.e., from exactly the
 boundary/singularity structure Thatch proposes to study. The instrument and
 its honest baseline already exist; the missing mathematics is the engine.
+
+**Revision 2 — scope of the baseline.** The additive baseline was measured
+along a *single* parameter axis (trust). Schubert v0.5.0 also ships an
+implemented, tested wall on a *different* axis: the grant-expiry cliff
+(`crypto.rs` — "a grant is dead the instant `now >= expires_at`; the
+boundary is inclusive"). Composition of walls in heterogeneous coordinates
+(time × trust) has never been run — see probe S4.
 
 ### 2.4 Schubert singular strata and resolution
 
@@ -154,6 +179,18 @@ Conjecture (marked as such): the right answer composes all three — the
 skeleton (L3) as the combinatorial shadow, the surreal thickening (L2) as its
 quantitative measure, the log structure (L1) as its composition law.
 
+**Revision 2 sharpening — one object or four?** The four in-stack edges
+live in different categories: time-orders (grant expiry), truth values (Ω),
+similarity scores (Minuet retrieval), Zariski strata (Schubert varieties).
+The synthesis conjecture assumes a single geometric object of which these
+are presentations. The alternative: Ω is already the whole story at the
+discrete level, the stratum poset at the combinatorial level, and the
+ε-thickening is a *measure* on strata rather than a geometry — in which
+case Thatch's deliverable is a dictionary between existing columns, not a
+new column. Current speculation (operator's instinct, recorded as §6.1):
+the four may be frame presentations of one object, as Maxwell's four
+vector-calculus equations are frame presentations of one bivector equation.
+
 ## 5. Placement — the Rich Toolbox direction
 
 Thatch is **its own foundation crate**. The dependency arrow only points
@@ -183,11 +220,25 @@ Principles:
   structure for its Schubert/tropical core; Minuet — a measured notion of
   the retrieval edge.
 
+**Revision 2 — the conversation-vs-crate endgame.** If every probe result
+files naturally as a PR in a consumer repo (S4 in Schubert, the Ω-extension
+in Karpal, the retrieval measurement in Minuet), Thatch-as-repo may never
+need to hold code. The modest outcome is a dictionary — a
+`strata(partition) -> Poset` table, an Ω-indexed labeling of its elements,
+an `EpsilonPolynomial`-valued grading — or even a vocabulary document with
+probes living in their consumers. The program's success and the repo's
+success are separable, and this document treats them as such.
+
 **Name note:** `thatch` was verified available on crates.io 2026-08-20.
 
 ## 6. Open questions
 
-1. Which lens (L1/L2/L3) survives contact with a probe — and is the
+1. **One object or four?** Is "the edge" a single geometric object of
+   which the in-stack edges are presentations — and if one, what
+   formalism makes the unity manifest, the way four vector-calculus
+   Maxwell equations become one bivector equation in spacetime algebra?
+   *(Revision 2 — current speculation focus.)*
+2. Which lens (L1/L2/L3) survives contact with a probe — and is the
    three-lens synthesis (§4) real or wishful?
 2. What is the boundary object for a *capability surface* specifically —
    what plays the role log structure plays for schemes?
@@ -200,6 +251,8 @@ Principles:
    different regime?
 6. What is the smallest theorem Thatch could state that is *new* rather
    than an import?
+7. Is Thatch a crate or a dictionary between existing columns — what
+   observation would distinguish the two? *(Revision 2; see §5 endgame.)*
 
 ## 7. Falsifiable probes (small, killable, ordered)
 
@@ -225,6 +278,23 @@ Principles:
   Minuet store's decay/retrieval and test for wall-like discontinuities.
   *Falsifies:* the frame's applicability to memory edges (a negative here
   scopes Thatch to policy-space geometry only).
+- **S4 — Heterogeneous wall coordinates (Revision 2; lives inside
+  Schubert, needs no Thatch code).** Compose capabilities whose walls sit
+  in different parameters — a time-walled grant (`expires_at` cliff) under
+  a trust-walled capability — via `analyze_composed_stability`, and watch
+  `non_additive_breakpoints`. The instrument and the wall are in the same
+  crate; this is the cheapest candidate for *deliberate* non-additivity in
+  the stack. *Falsifies:* the cheapest form of "non-additivity lives at
+  shared edges" — if heterogeneous-coordinate composition is still
+  additive, the conjecture narrows sharply; if breakpoints appear, Thatch
+  inherits a validated problem. Either outcome is informative.
+
+**Revision 2 — sequencing by consumer pull.** The list is ordered by cost;
+ordered by *consumer pull* it inverts — S2 feeds Karpal (active), S4 feeds
+Schubert within one sprint, S3 feeds Minuet (instrument already built), and
+S0 feeds nobody yet: it is substrate. Working order: run **S0 + S2 as a
+pair**; S4 is Schubert's to run at any time, independent of this repo; S3
+waits for Minuet pull.
 
 ## 8. What this document is not
 
@@ -238,12 +308,14 @@ Principles:
 
 ## 9. Decision asks and next steps
 
-1. Does §4's question survive scrutiny, or does one of the three lenses
-   collapse it?
-2. Approve S0 as the first implementation target (cheapest, zero new math,
-   produces the substrate every other probe reads from)?
-3. Repo logistics: Forgejo mirror + GitHub remote when ready
-   (`/skill:ia-forgejo-mirror`); gitflow per `/skill:ia-gitflow` from the
-   first pushed branch.
+1. Does §4's question survive scrutiny — one object or four — and does the
+   formalism speculation (§6.1) hold up?
+2. Approve **S0 + S2 as the paired first target** (S0 the substrate, S2
+   the adjudicator — where the program is vindicated or absorbed)?
+3. Offer **S4 to Schubert** as an in-crate probe, independent of Thatch's
+   own schedule?
+4. Repo logistics: GitHub remote exists; Forgejo mirror when ready
+   (`/skill:ia-forgejo-mirror`); branch discipline from the next change
+   after the bootstrap closes.
 
 *The map ends at the shoreline. Thatch is the mathematics of the waterline.*
