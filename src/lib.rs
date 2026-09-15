@@ -25,11 +25,13 @@
 //! assert_eq!(poset.open_cell_dimension, 3);
 //! ```
 
+pub mod dict;
 pub mod error;
 pub mod grassmannian;
 pub mod partition;
 pub mod strata;
 
+pub use dict::{omega_composition, omega_pair, pairing, OmegaValue, Pairing};
 pub use error::ThatchError;
 pub use grassmannian::Grassmannian;
 pub use partition::Partition;

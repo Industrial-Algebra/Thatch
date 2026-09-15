@@ -77,6 +77,33 @@ impl Partition {
         (0..n).all(|i| self.at(i) <= other.at(i))
     }
 
+    /// Componentwise join λ ∨ μ (zero-padded): the least upper bound in
+    /// the componentwise order. For Schubert varieties on a Grassmannian,
+    /// Ω_λ ∩ Ω_μ = Ω_{λ∨μ} — the join classifies the set-meet.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// use thatch::Partition;
+    ///
+    /// let join = Partition::new(vec![2])?
+    ///     .join_componentwise(&Partition::new(vec![1, 1])?)?;
+    /// assert_eq!(join, Partition::new(vec![2, 1])?);
+    /// # Ok::<(), thatch::ThatchError>(())
+    /// ```
+    ///
+    /// # Errors
+    ///
+    /// Returns [`ThatchError::NotWeaklyDecreasing`] — unreachable for
+    /// valid inputs (the max of weakly-decreasing sequences is
+    /// weakly-decreasing); the `Result` follows the constructor
+    /// convention.
+    pub fn join_componentwise(&self, other: &Partition) -> Result<Partition, ThatchError> {
+        let n = self.parts.len().max(other.parts.len());
+        let joined: Vec<u32> = (0..n).map(|i| self.at(i).max(other.at(i))).collect();
+        Partition::new(joined)
+    }
+
     fn at(&self, i: usize) -> u32 {
         self.parts.get(i).copied().unwrap_or(0)
     }
