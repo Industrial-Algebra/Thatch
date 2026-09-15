@@ -31,6 +31,10 @@ cargo test
 cargo doc --no-deps
 ```
 
+CI (`.github/workflows/ci.yml`) mirrors this matrix on `develop`/`main`
+plus a `--no-default-features` build check. Toolchain: nightly, pinned in
+`rust-toolchain.toml`.
+
 ## Read-first routing
 
 | Task | Read |
