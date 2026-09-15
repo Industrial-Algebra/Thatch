@@ -4,25 +4,11 @@
 //! # Thatch — geometry of the edge
 //!
 //! The infinitesimal boundary between something and emptiness (or a
-//! singularity), treated as geometry in its own right: what lives in the
-//! ε-neighborhood of an edge, what its strata are, and how it composes when
-//! two somethings share a boundary.
+//! singularity), treated as geometry in its own right. Founding document:
+//! `docs/ideation-edge-geometry.md` in the repository.
 //!
-//! **Status:** ideation. The mathematics is not yet substantiated — the
-//! founding document (`docs/ideation-edge-geometry.md` in the repository)
-//! states the established results it will draw on (logarithmic geometry,
-//! formal neighborhoods, KS wall-crossing, Schubert singular strata,
-//! skeletons, surreal infinitesimals) and the falsifiable probes that must
-//! earn any implementation. No public API exists yet, deliberately.
-//!
-//! ## Placement
-//!
-//! Thatch is a foundation crate in the Industrial Algebra "Rich Toolbox": it
-//! depends on **nothing** in the IA ecosystem; Schubert (wall-crossing
-//! dynamics), Karpal (structured emptiness, the Ω lattice), Amari (Schubert
-//! calculus, surreal ε-quantities), and Minuet (holographic memory edges)
-//! may all draw from it. The dependency arrow only ever points away from
-//! Thatch.
+//! Probe **S0** ships the substrate: the boundary-stratum poset of a
+//! Schubert variety Ω_λ in Gr(k, k+m), computed from partitions alone.
 //!
 //! ## Features
 //!
@@ -30,7 +16,23 @@
 //!
 //! ## Usage
 //!
-//! ```rust
-//! // Nothing to use yet — this crate is at the ideation stage. The first
-//! // public API will follow the first surviving probe in the founding doc.
 //! ```
+//! use thatch::{strata, Grassmannian, Partition};
+//!
+//! let gr = Grassmannian::new(2, 2).expect("valid"); // Gr(2,4)
+//! let lambda = Partition::new(vec![1, 0]).expect("valid");
+//! let poset = strata(&lambda, &gr).expect("in box");
+//! assert_eq!(poset.open_cell_dimension, 3);
+//! ```
+
+#![cfg_attr(not(feature = "std"), no_std)]
+
+pub mod error;
+pub mod grassmannian;
+pub mod partition;
+pub mod strata;
+
+pub use error::ThatchError;
+pub use grassmannian::Grassmannian;
+pub use partition::Partition;
+pub use strata::{strata, Stratum, StratumPoset};
