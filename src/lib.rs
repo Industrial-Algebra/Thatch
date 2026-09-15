@@ -25,8 +25,6 @@
 //! assert_eq!(poset.open_cell_dimension, 3);
 //! ```
 
-#![cfg_attr(not(feature = "std"), no_std)]
-
 pub mod error;
 pub mod grassmannian;
 pub mod partition;
