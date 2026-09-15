@@ -27,7 +27,7 @@
 //!
 //! | Ω value | pair (set-meet) | composition (product) |
 //! |---|---|---|
-//! | `StructuralZero` | join outside the box | `|λ|+|μ| > k·m` |
+//! | `StructuralZero` | join outside the box | `\|λ\| + \|μ\| > k·m` |
 //! | `GeometricZero` | **unreachable** (theorem) | **unreachable** on Grassmannian pairs |
 //! | `Positive` | `Ω_{λ∨μ} ≠ ∅` | budget available |
 //! | `Underdetermined` | **epistemic slot** — never returned; the dictionary is decidable | ditto |
