@@ -1,14 +1,11 @@
 // Copyright (C) 2026 Industrial Algebra
 // SPDX-License-Identifier: Apache-2.0
 
-//! # Thatch — geometry of the edge
+//! # Thatch — Schubert strata on Grassmannians
 //!
-//! The infinitesimal boundary between something and emptiness (or a
-//! singularity), treated as geometry in its own right. Founding document:
-//! `docs/ideation-edge-geometry.md` in the repository.
-//!
-//! Probe **S0** ships the substrate: the boundary-stratum poset of a
-//! Schubert variety Ω_λ in Gr(k, k+m), computed from partitions alone.
+//! Combinatorial substrate for Schubert varieties: boundary-stratum
+//! posets ([`strata()`]) and intersection classification for pairs of
+//! positions ([`dict`]).
 //!
 //! ## Features
 //!

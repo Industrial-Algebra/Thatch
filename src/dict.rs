@@ -1,8 +1,8 @@
 // Copyright (C) 2026 Industrial Algebra
 // SPDX-License-Identifier: Apache-2.0
 
-//! The Ω↔stratum dictionary — probe S2 of the founding doc
-//! (`docs/ideation-edge-geometry.md`).
+//! The Ω↔stratum dictionary: intersection classification for pairs of
+//! Schubert positions.
 //!
 //! Two different geometries live behind the word "intersection", and the
 //! dictionary's content is that they are *different edges*:
@@ -35,7 +35,7 @@
 //! `GeometricZero` and `Underdetermined` earn their place in Ω only in
 //! richer settings (flag conditions, multi-way products, budgeted
 //! computation); the pairwise Grassmannian world is fully decided by the
-//! stratum poset of [S0][mod@crate::strata].
+//! stratum poset of [module][`mod@crate::strata`].
 //!
 //! # Examples
 //!
@@ -61,14 +61,13 @@ use crate::error::ThatchError;
 use crate::grassmannian::Grassmannian;
 use crate::partition::Partition;
 
-/// Where `μ` sits relative to `λ` in the closure poset of [S0][mod@crate::strata].
+/// Where `μ` sits relative to `λ` in the closure poset of the [strata module][`mod@crate::strata`].
 ///
 /// Both sides are compared zero-padded, so short forms are equal to their
 /// padded forms: `[2]` is the same stratum as `[2, 0]`.
 ///
-/// `Stricter` means `μ ≥ λ` componentwise (strictly): `X_μ ⊆ Ω_λ` — a
-/// principal positioned at `μ` satisfies λ's constraint and more. In
-/// access terms: the holder of `μ` is over-qualified for `λ`.
+/// `Stricter` means `μ ≥ λ` componentwise (strictly): `X_μ ⊆ Ω_λ` —
+/// deeper in the closure order. μ satisfies λ's condition and more.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum Pairing {
     /// Same stratum (equal after zero-padding).

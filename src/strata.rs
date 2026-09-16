@@ -1,7 +1,7 @@
 // Copyright (C) 2026 Industrial Algebra
 // SPDX-License-Identifier: Apache-2.0
 
-//! Boundary strata of Schubert varieties (probe S0).
+//! Boundary strata of Schubert varieties.
 
 use crate::error::ThatchError;
 use crate::grassmannian::Grassmannian;
