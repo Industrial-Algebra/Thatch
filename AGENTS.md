@@ -14,6 +14,9 @@ surface them here without an explicit operator decision.
 - **Gitflow** (`/skill:ia-gitflow`): `develop`/`main` receive changes only
   via merged PRs; every release is followed by a `main → develop` backmerge
   **merge commit**. Every change lands via branch + PR.
+- **Merge actor**: the **operator** merges every PR — feature, release, and
+  backmerge alike. Agents author, verify, and hand off at the merge
+  (ia-gitflow Rule 4, standing since 2026-09-16).
 - **Dependency direction**: no IA-ecosystem dependencies in `[dependencies]`
   — ever. Dev-dependencies are fine.
 - **License**: Apache-2.0 + two-line header on every `.rs` file.
