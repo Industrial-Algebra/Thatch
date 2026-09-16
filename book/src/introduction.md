@@ -1,60 +1,35 @@
 # Introduction
 
-**Thatch** is the geometry of the edge — the infinitesimal boundary between
-something and emptiness, studied as a mathematical object in its own right.
+**Thatch** is a small Rust library of combinatorial tools for Schubert
+varieties on Grassmannians: stratum posets and intersection
+classification, with zero dependencies.
 
-> Named for Edward Teach/Thatch — Blackbeard. The pirate's domain was the
-> edge: the shoreline between land and open sea, the map's boundary where
-> the known meets the unmarked. This crate studies that boundary as
-> mathematics.
+## What It Does
 
-## The Thesis
+1. **Strata substrate** — partitions as codimension data, Grassmannian
+   positions, and `strata()`: the boundary-stratum poset of Ω_λ, with
+   per-stratum dimensions and closure pairs.
+2. **Intersection classification** — two different intersection
+   questions, kept deliberately separate:
+   - `omega_pair` — the **set-meet**: Ω_λ ∩ Ω_μ = Ω_{λ∨μ}, nonempty iff
+     the componentwise join fits the box.
+   - `omega_composition` — the **product budget**: the cohomological
+     product survives iff |λ| + |μ| ≤ k·m.
 
-Across the Industrial Algebra stack, two systems approach the same
-boundary from opposite sides:
+The two can disagree — positions can have a nonempty meet while
+overdrawing the product budget — and the crate is precise about which
+question it is answering.
 
-- **Schubert (wall-crossing):** a *wall* is the parameter value at which a
-  capability crosses from stable to unstable — from something to nothing.
-  The phase diagram counts what exists; the wall is the existence boundary.
-- **Karpal (structured emptiness):** the Ω lattice types the *kinds* of
-  emptiness, insisting that "empty" is not one thing and that the
-  provenance of a zero is load-bearing.
+## Design Notes
 
-Both stop at the boundary. Neither says what the boundary *is*.
-
-**The thesis of Thatch: the boundary is itself a geometric object.** It has
-strata, it carries structure, and it composes when two somethings share an
-edge.
-
-| Layer | Question it answers | Home |
-|---|---|---|
-| Kinds | *What sort* of emptiness is this? | Karpal (Ω) |
-| Dynamics | *When/how* does something cross into it? | Schubert (wall-crossing) |
-| **Geometry** | *What is the interface itself?* | **Thatch** |
-
-## What Is Implemented
-
-Thatch 0.1 ships two verified pieces of the picture:
-
-1. **The strata substrate** (probe S0) — boundary-stratum posets of
-   Schubert varieties on Grassmannians: partitions as codimension data,
-   the closure order, per-stratum dimensions.
-2. **The Ω↔stratum dictionary** (probe S2) — the structured emptiness
-   lattice mirrored dependency-free, mapped onto the poset, with the
-   theorem that the *pair* world has no geometric zeros, and the headline
-   that **compatibility and composability are independent edges**.
-
-The founding document
-([`docs/ideation-edge-geometry.md`](https://github.com/Industrial-Algebra/Thatch/blob/develop/docs/ideation-edge-geometry.md))
-records the full program: the established fields Thatch draws on, the
-falsifiable probes, and what this crate deliberately is not.
-
-## Placement
-
-Thatch is a foundation crate in the Industrial Algebra "Rich Toolbox": it
-depends on nothing in the IA ecosystem. Schubert, Karpal, Amari, and
-Minuet may all draw from it — dependency arrows point away from Thatch,
-never toward it.
+- **Zero dependencies.** Everything is decided combinatorially from the
+  componentwise order on box partitions — no limits, no cohomology
+  machinery, no sheaves.
+- **No panics.** Fallible constructors return `Result`; lookups are
+  total. Validated inputs only.
+- **TDD throughout.** Every fixture (stratum counts, the exhaustive
+  pair classification, the budget boundaries) is pinned by
+  regression tests.
 
 ## License
 

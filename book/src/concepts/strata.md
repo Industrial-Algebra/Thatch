@@ -82,9 +82,8 @@ Read the (2,1) row geometrically: Ω_(2,1) is a curve whose boundary is
 the single point Ω_(2,2). Read the (2,2) row: Ω_(2,2) is itself a point —
 no boundary at all.
 
-## Why Combinatorial Suffices (For Now)
+## Why Combinatorial Suffices
 
 On Grassmannians, everything above is decided by the componentwise order
-on box partitions — no limits, no cohomology, no sheaves. That decidability
-is what makes the [Ω↔stratum dictionary](./omega.md) exact, and it is the
-platform from which the deeper probes (ε-thickening, skeletons) launch.
+on box partitions — no limits, no cohomology, no sheaves. That
+decidability is what makes the [Ω↔stratum dictionary](./omega.md) exact.

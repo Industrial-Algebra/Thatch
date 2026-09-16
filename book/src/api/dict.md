@@ -37,8 +37,8 @@ assert_eq!(
 );
 ```
 
-`Stricter` is the access-control reading: a principal positioned at μ
-satisfies λ's constraint *and more* — over-qualified for λ.
+`Stricter` means μ lies deeper in the closure order: μ satisfies λ's
+condition *and more*.
 
 The function agrees exhaustively with `strata`: μ appears in the boundary
 of `strata(λ)` exactly when `pairing(λ, μ) = Stricter`.

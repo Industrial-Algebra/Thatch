@@ -1,7 +1,6 @@
 # Ω: Structured Emptiness
 
-"Empty" is not one thing. The Ω lattice — used across the ecosystem as
-`IntersectionKind` — types the kinds of emptiness:
+"Empty" is not one thing. The Ω lattice types the kinds of emptiness:
 
 | Value | Meaning | Provenance |
 |---|---|---|
@@ -10,9 +9,9 @@
 | `Positive` | nonempty, with known multiplicity | exists |
 | `Underdetermined` | the computation could not resolve it | epistemic — the *asker*, not the world |
 
-Thatch mirrors this lattice dependency-free as `OmegaValue`. The mirror
-is deliberate: arrows point away from Thatch, so the ecosystem's Ω and
-Thatch's Ω stay in documented correspondence rather than in a dependency.
+Thatch mirrors this lattice dependency-free as `OmegaValue`, keeping the
+variant names and semantics in correspondence with the ecosystem
+convention without a dependency.
 
 ## Two Intersections, Not One
 
@@ -63,12 +62,10 @@ assert_eq!(
 );
 ```
 
-In access-control terms: two capabilities can coexist in a principal's
-namespace (compatibility) while their *composition* — the operadic seam
-that consumes both — overdraws the geometry's budget (composability).
-Schubert's `compose` is a product-type operation; this is why "the
-principal holds both" and "the principal can compose both" are different
-claims, with different proofs.
+Read order-theoretically: two conditions can hold simultaneously — their
+meet exists (compatibility) — while their combined codimension demand
+exceeds what the space affords (composability). "Both hold" and "both
+compose" are different claims, with different proofs.
 
 ## Where Ω Earns Its Extra Values
 
@@ -82,6 +79,8 @@ questions grow:
   incomplete data. It types the *asker*, never the world, and Thatch
   never returns it.
 
-This is the design input for the interaction term (probe B3 in Schubert)
-and for the geometry-typed grants of Workstream C: multi-way products are
-exactly where the full lattice is needed.
+This is where Ω earns its extra values: multi-way products — three or
+more constraints — leave the pair world, and there the full lattice is
+needed: deeper intersections can be dimensioned yet empty
+(`GeometricZero` becomes genuinely reachable), and budgeted computation
+re-introduces the epistemic slot (`Underdetermined`).

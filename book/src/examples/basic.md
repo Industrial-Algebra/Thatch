@@ -74,7 +74,7 @@ println!("composable:  {:?}", product);   // StructuralZero
 # }
 ```
 
-The two positions coexist on a principal — yet their composition
+The two positions coexist — yet their composition
 overdraws the LR budget (`|λ|+|μ| = 6 > k·m = 4`). Compatibility and
 composability are independent edges; conflating them is the mistake the
 dictionary exists to prevent.
