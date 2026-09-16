@@ -1,0 +1,771 @@
+<!DOCTYPE HTML>
+<html lang="en" class="navy sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Thatch</title>
+        <meta name="robots" content="noindex">
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="Geometry of the edge — the infinitesimal boundary between something and emptiness">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="favicon-8114d1fc.png">
+        <link rel="stylesheet" href="css/variables-8adf115d.css">
+        <link rel="stylesheet" href="css/general-2459343d.css">
+        <link rel="stylesheet" href="css/chrome-ae938929.css">
+        <link rel="stylesheet" href="css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="book/theme/custom-889b3d06.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "navy";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "searchindex-05810519.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc-a9174fc5.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('navy')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Thatch</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/Industrial-Algebra/Thatch" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="introduction"><a class="header" href="#introduction">Introduction</a></h1>
+<p><strong>Thatch</strong> is a small Rust library of combinatorial tools for Schubert
+varieties on Grassmannians: stratum posets and intersection
+classification, with zero dependencies.</p>
+<h2 id="what-it-does"><a class="header" href="#what-it-does">What It Does</a></h2>
+<ol>
+<li><strong>Strata substrate</strong> — partitions as codimension data, Grassmannian
+positions, and <code>strata()</code>: the boundary-stratum poset of Ω_λ, with
+per-stratum dimensions and closure pairs.</li>
+<li><strong>Intersection classification</strong> — two different intersection
+questions, kept deliberately separate:
+<ul>
+<li><code>omega_pair</code> — the <strong>set-meet</strong>: Ω_λ ∩ Ω_μ = Ω_{λ∨μ}, nonempty iff
+the componentwise join fits the box.</li>
+<li><code>omega_composition</code> — the <strong>product budget</strong>: the cohomological
+product survives iff |λ| + |μ| ≤ k·m.</li>
+</ul>
+</li>
+</ol>
+<p>The two can disagree — positions can have a nonempty meet while
+overdrawing the product budget — and the crate is precise about which
+question it is answering.</p>
+<h2 id="design-notes"><a class="header" href="#design-notes">Design Notes</a></h2>
+<ul>
+<li><strong>Zero dependencies.</strong> Everything is decided combinatorially from the
+componentwise order on box partitions — no limits, no cohomology
+machinery, no sheaves.</li>
+<li><strong>No panics.</strong> Fallible constructors return <code>Result</code>; lookups are
+total. Validated inputs only.</li>
+<li><strong>TDD throughout.</strong> Every fixture (stratum counts, the exhaustive
+pair classification, the budget boundaries) is pinned by
+regression tests.</li>
+</ul>
+<h2 id="license"><a class="header" href="#license">License</a></h2>
+<p>Apache-2.0. Commercial licensing available — contact Industrial Algebra.</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="getting-started"><a class="header" href="#getting-started">Getting Started</a></h1>
+<p>Thatch has <strong>zero dependencies</strong> — add it and use it.</p>
+<h2 id="install"><a class="header" href="#install">Install</a></h2>
+<pre><code class="language-toml">[dependencies]
+thatch = "0.1"
+</code></pre>
+<h2 id="first-boundary"><a class="header" href="#first-boundary">First Boundary</a></h2>
+<p>Ask for the boundary of a Schubert variety:</p>
+<pre class="playground"><code class="language-rust">use thatch::{strata, Grassmannian, Partition};
+
+fn main() -&gt; Result&lt;(), thatch::ThatchError&gt; {
+    // Gr(2, 4): 2-planes in 4-space. The box is 2×2.
+    let g = Grassmannian::new(2, 2)?;
+
+    // λ = (2, 1): codimension 3. Ω_(2,1) is a curve.
+    let lambda = Partition::new(vec![2, 1])?;
+    let poset = strata(&amp;lambda, &amp;g)?;
+
+    println!("open cell dimension: {}", poset.open_cell_dimension);
+    for b in &amp;poset.boundary {
+        println!(
+            "  μ = {:?}: dim {}, codim {}",
+            b.partition.parts(), b.dimension, b.codimension_in_variety
+        );
+    }
+    Ok(())
+}</code></pre>
+<p>The boundary of the curve Ω_(2,1) is the single point Ω_(2,2) — the poset
+says so, with dimensions attached.</p>
+<h2 id="first-dictionary-call"><a class="header" href="#first-dictionary-call">First Dictionary Call</a></h2>
+<p>Two positions on the Grassmannian have <strong>two</strong> different intersection
+questions, and the dictionary separates them:</p>
+<pre class="playground"><code class="language-rust">use thatch::{omega_composition, omega_pair, Grassmannian, Partition, OmegaValue};
+
+fn main() -&gt; Result&lt;(), thatch::ThatchError&gt; {
+    let g = Grassmannian::new(2, 2)?;
+    let lambda = Partition::new(vec![2, 1])?;
+
+    // Compatibility: do the varieties meet? Yes — the meet is Ω_(2,1).
+    assert_eq!(
+        omega_pair(&amp;g, &amp;lambda, &amp;lambda)?,
+        OmegaValue::Positive
+    );
+
+    // Composability: does the LR budget allow the product? No — |λ|+|μ| = 6
+    // exceeds k·m = 4.
+    assert_eq!(
+        omega_composition(&amp;g, &amp;lambda, &amp;lambda)?,
+        OmegaValue::StructuralZero
+    );
+    Ok(())
+}</code></pre>
+<p>Compatible, yet incomposable. That independence is the dictionary’s
+content — see <a href="#the-ωstratum-dictionary">the Ω↔stratum dictionary</a>.</p>
+<h2 id="where-to-go-next"><a class="header" href="#where-to-go-next">Where to Go Next</a></h2>
+<ul>
+<li><a href="#strata-partitions-and-schubert-varieties">Strata: the mathematics</a> — partitions, closure
+orders, and why the boundary is a strict upset.</li>
+<li><a href="#ω-structured-emptiness">Ω: structured emptiness</a> — the lattice and the
+pair theorem.</li>
+<li><a href="#basic-usage">Basic usage walkthrough</a>.</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="strata-partitions-and-schubert-varieties"><a class="header" href="#strata-partitions-and-schubert-varieties">Strata: Partitions and Schubert Varieties</a></h1>
+<p>The substrate of everything Thatch computes is the stratification of a
+Grassmannian by Schubert varieties. This chapter is the mathematics,
+stated as the crate uses it.</p>
+<h2 id="partitions-as-codimension-data"><a class="header" href="#partitions-as-codimension-data">Partitions as Codimension Data</a></h2>
+<p>A partition λ = (λ₁ ≥ λ₂ ≥ … ≥ λₖ ≥ 0) is <em>codimension data</em>: it indexes
+how far a position sits from generic. The <strong>size</strong> |λ| = Σλᵢ is the
+codimension of the Schubert variety Ω_λ.</p>
+<p>In Thatch, partitions live in the <code>k × m</code> box: at most <code>k</code> parts, each at
+most <code>m</code>. Short forms are identified with their zero-padded forms —
+<code>[2]</code> and <code>[2, 0]</code> are the same position.</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use thatch::Partition;
+
+let lambda = Partition::new(vec![2, 1])?;   // weakly decreasing, or error
+assert_eq!(lambda.size(), 3);               // |λ| = codim Ω_λ
+assert!(lambda.fits_in(2, 2));              // inside the 2×2 box
+<span class="boring">}</span></code></pre>
+<h2 id="grassmannians"><a class="header" href="#grassmannians">Grassmannians</a></h2>
+<p><code>Grassmannian::new(k, m)</code> is the space of k-planes in (k+m)-space. The
+crate convention: <code>m</code> is the <em>slack</em>, ambient dimension is <code>k + m</code>, and
+the box of valid positions is <code>k × m</code>. <code>Gr(2,4)</code> of the literature is
+<code>Grassmannian::new(2, 2)</code> — six positions, <code>[0,0]</code> through <code>[2,2]</code>.</p>
+<p>The variety dimension is <code>k·m</code>, so the <strong>open cell</strong> of λ has dimension
+<code>k·m − |λ|</code>.</p>
+<h2 id="schubert-varieties-and-the-closure-order"><a class="header" href="#schubert-varieties-and-the-closure-order">Schubert Varieties and the Closure Order</a></h2>
+<p>Ω_λ is a closed subvariety stratified by Schubert cells:</p>
+<pre><code>Ω_λ = ⨿_{μ ≥ λ} X_μ
+</code></pre>
+<p>where <code>μ ≥ λ</code> is the componentwise (zero-padded) order. Three
+consequences the crate relies on:</p>
+<ol>
+<li><strong>The boundary is the strict upset:</strong> ∂Ω_λ = ⨿_{μ &gt; λ} X_μ — all cells
+strictly above λ in the componentwise order.</li>
+<li><strong>dim X_μ = k·m − |μ|</strong> — deeper in the order, smaller the cell.</li>
+<li><strong>The strata form a poset under closure:</strong> X_μ ⊆ closure(X_ν) iff
+μ ≥ν componentwise.</li>
+</ol>
+<h2 id="the-strata-function"><a class="header" href="#the-strata-function">The <code>strata</code> Function</a></h2>
+<p><code>strata(&amp;lambda, &amp;g)</code> returns the full poset of Ω_λ’s boundary:</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use thatch::{strata, Grassmannian, Partition};
+
+let g = Grassmannian::new(2, 2)?;        // Gr(2,4)
+let lambda = Partition::new(vec![1, 0])?;
+let poset = strata(&amp;lambda, &amp;g)?;
+
+assert_eq!(poset.open_cell_dimension, 3);  // k·m − |λ| = 4 − 1
+// Boundary: the four strata μ &gt; (1,0), ascending lexicographically.
+assert_eq!(poset.boundary.len(), 4);
+// Closure pairs: (i, j) with closure(boundary[i]) ⊇ boundary[j].
+assert_eq!(poset.order.len(), 5);
+<span class="boring">}</span></code></pre>
+<p>Fixtures the test-suite pins (Gr(2,4)):</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>λ</th><th>boundary strata</th><th>closure pairs</th></tr>
+</thead>
+<tbody>
+<tr><td>(0,0)</td><td>5</td><td>9</td></tr>
+<tr><td>(1,0)</td><td>4</td><td>5</td></tr>
+<tr><td>(1,1)</td><td>2</td><td>1</td></tr>
+<tr><td>(2,0)</td><td>2</td><td>1</td></tr>
+<tr><td>(2,1)</td><td>1</td><td>0</td></tr>
+<tr><td>(2,2)</td><td>0</td><td>0</td></tr>
+</tbody>
+</table>
+</div>
+<p>Read the (2,1) row geometrically: Ω_(2,1) is a curve whose boundary is
+the single point Ω_(2,2). Read the (2,2) row: Ω_(2,2) is itself a point —
+no boundary at all.</p>
+<h2 id="why-combinatorial-suffices"><a class="header" href="#why-combinatorial-suffices">Why Combinatorial Suffices</a></h2>
+<p>On Grassmannians, everything above is decided by the componentwise order
+on box partitions — no limits, no cohomology, no sheaves. That
+decidability is what makes the <a href="#ω-structured-emptiness">Ω↔stratum dictionary</a> exact.</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="ω-structured-emptiness"><a class="header" href="#ω-structured-emptiness">Ω: Structured Emptiness</a></h1>
+<p>“Empty” is not one thing. The Ω lattice types the kinds of emptiness:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Value</th><th>Meaning</th><th>Provenance</th></tr>
+</thead>
+<tbody>
+<tr><td><code>StructuralZero</code></td><td>the budget was overdrawn — emptiness by dimension</td><td>the constraint system itself</td></tr>
+<tr><td><code>GeometricZero</code></td><td>correctly dimensioned, yet empty</td><td>the geometry refused</td></tr>
+<tr><td><code>Positive</code></td><td>nonempty, with known multiplicity</td><td>exists</td></tr>
+<tr><td><code>Underdetermined</code></td><td>the computation could not resolve it</td><td>epistemic — the <em>asker</em>, not the world</td></tr>
+</tbody>
+</table>
+</div>
+<p>Thatch mirrors this lattice dependency-free as <code>OmegaValue</code>, keeping the
+variant names and semantics in correspondence with the ecosystem
+convention without a dependency.</p>
+<h2 id="two-intersections-not-one"><a class="header" href="#two-intersections-not-one">Two Intersections, Not One</a></h2>
+<p>The dictionary’s central observation: behind the word “intersection” hide
+two different questions with different geometries.</p>
+<h3 id="1-compatibility--the-set-meet"><a class="header" href="#1-compatibility--the-set-meet">1. Compatibility — the set-meet</a></h3>
+<p>Do Ω_λ and Ω_μ <em>meet</em>? For Schubert varieties on a Grassmannian:</p>
+<pre><code>Ω_λ ∩ Ω_μ = Ω_{λ∨μ}
+</code></pre>
+<p>where λ∨μ is the componentwise join. The meet is itself a Schubert
+variety, nonempty iff the join fits the box. <code>omega_pair(g, λ, μ)</code>
+computes exactly this.</p>
+<p><strong>The pair theorem.</strong> Because the meet is always again a Schubert
+variety, a <em>dimensioned but empty</em> meet cannot occur for pairs:
+<code>GeometricZero</code> is unreachable in the pair world. The exhaustive test
+over all of Gr(2,4)’s 36 pairs pins this; the general argument is the
+displayed formula itself.</p>
+<h3 id="2-composability--the-product"><a class="header" href="#2-composability--the-product">2. Composability — the product</a></h3>
+<p>Does the cohomological product <code>[Ω_λ] · [Ω_μ]</code> survive the budget? The
+LR budget is the variety dimension <code>k·m</code>: the product is structurally
+zero whenever <code>|λ| + |μ| &gt; k·m</code>. <code>omega_composition(g, λ, μ)</code> computes
+this.</p>
+<h2 id="the-headline-independence"><a class="header" href="#the-headline-independence">The Headline: Independence</a></h2>
+<p>The two questions are independent. On Gr(2,4):</p>
+<ul>
+<li>λ = μ = (2,1): the meet is Ω_(2,1) ≠ ∅ — <strong>compatible</strong>;</li>
+<li>but |λ| + |μ| = 6 &gt; k·m = 4 — <strong>incomposable</strong>.</li>
+</ul>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use thatch::{omega_composition, omega_pair, Grassmannian, Partition, OmegaValue};
+
+let g = Grassmannian::new(2, 2)?;
+let lambda = Partition::new(vec![2, 1])?;
+assert_eq!(omega_pair(&amp;g, &amp;lambda, &amp;lambda)?, OmegaValue::Positive);
+assert_eq!(
+    omega_composition(&amp;g, &amp;lambda, &amp;lambda)?,
+    OmegaValue::StructuralZero
+);
+<span class="boring">}</span></code></pre>
+<p>Read order-theoretically: two conditions can hold simultaneously — their
+meet exists (compatibility) — while their combined codimension demand
+exceeds what the space affords (composability). “Both hold” and “both
+compose” are different claims, with different proofs.</p>
+<h2 id="where-ω-earns-its-extra-values"><a class="header" href="#where-ω-earns-its-extra-values">Where Ω Earns Its Extra Values</a></h2>
+<p>For pairs on Grassmannians, <code>StructuralZero</code> and <code>Positive</code> decide
+everything. The lattice’s richer values earn their keep only when the
+questions grow:</p>
+<ul>
+<li><strong><code>GeometricZero</code></strong> — beyond pairs: flag conditions and general
+intersections can be dimensioned yet empty.</li>
+<li><strong><code>Underdetermined</code></strong> — always epistemic: budgeted computation,
+incomplete data. It types the <em>asker</em>, never the world, and Thatch
+never returns it.</li>
+</ul>
+<p>This is where Ω earns its extra values: multi-way products — three or
+more constraints — leave the pair world, and there the full lattice is
+needed: deeper intersections can be dimensioned yet empty
+(<code>GeometricZero</code> becomes genuinely reachable), and budgeted computation
+re-introduces the epistemic slot (<code>Underdetermined</code>).</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="installation"><a class="header" href="#installation">Installation</a></h1>
+<h2 id="requirements"><a class="header" href="#requirements">Requirements</a></h2>
+<ul>
+<li>Rust 1.75+ (the toolchain is pinned to nightly in-repo for development;
+the crate itself builds on stable)</li>
+</ul>
+<p>Thatch has <strong>zero runtime dependencies</strong> — <code>cargo add thatch</code> brings
+nothing else in.</p>
+<h2 id="adding-to-a-project"><a class="header" href="#adding-to-a-project">Adding to a Project</a></h2>
+<pre><code class="language-toml">[dependencies]
+thatch = "0.1"
+</code></pre>
+<p>Or:</p>
+<pre><code class="language-bash">cargo add thatch
+</code></pre>
+<h2 id="building-from-source"><a class="header" href="#building-from-source">Building from Source</a></h2>
+<pre><code class="language-bash">git clone https://github.com/Industrial-Algebra/Thatch
+cd Thatch
+cargo build          # default features
+cargo test           # 40 tests: strata fixtures + dictionary theorems
+cargo doc --open     # full API documentation
+</code></pre>
+<h2 id="feature-notes"><a class="header" href="#feature-notes">Feature Notes</a></h2>
+<p>The crate carries a single conventional feature, <code>std</code> (default on). See
+<a href="#feature-flags">feature flags</a>.</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="feature-flags"><a class="header" href="#feature-flags">Feature Flags</a></h1>
+<p>Thatch follows the ecosystem doctrine: <strong>features are additive only</strong> —
+<code>#[cfg(feature)]</code> adds capability, never removes API.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Feature</th><th>Default</th><th>Effect</th></tr>
+</thead>
+<tbody>
+<tr><td><code>std</code></td><td>✓</td><td>Conventional ecosystem flag; currently inert — the crate uses <code>std</code> unconditionally</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="the-std-story"><a class="header" href="#the-std-story">The <code>std</code> Story</a></h2>
+<p>The scaffold once declared <code>#![cfg_attr(not(feature = "std"), no_std)]</code> —
+a promise the implementation did not keep (the error types use
+<code>std::fmt</code>, the storage is <code>Vec</code>). The promise was removed rather than
+falsely kept, and CI asserts that <code>--no-default-features</code> builds cleanly.
+If a genuine <code>no_std</code>/<code>alloc</code> story is ever needed, it will arrive as an
+additive change with its own gate — not as a resurrection of the false
+attribute.</p>
+<h2 id="verification"><a class="header" href="#verification">Verification</a></h2>
+<p>CI (<code>.github/workflows/ci.yml</code>) runs, on every PR and push to
+<code>develop</code>/<code>main</code>:</p>
+<ul>
+<li><code>cargo fmt --all --check</code></li>
+<li><code>cargo clippy --all-targets</code> with <code>-D warnings</code>, in both the default
+and all-features configurations</li>
+<li><code>cargo test</code> in the default and all-features configurations</li>
+<li><code>cargo check --no-default-features</code> (the honest-build assertion)</li>
+<li><code>cargo doc --all-features --no-deps</code> with <code>RUSTDOCFLAGS=-D warnings</code></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="strata-substrate"><a class="header" href="#strata-substrate">Strata Substrate</a></h1>
+<p>The S0 surface: partitions, Grassmannians, and boundary-stratum posets.</p>
+<h2 id="partition"><a class="header" href="#partition"><code>Partition</code></a></h2>
+<p>Codimension data with validation on construction.</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use thatch::Partition;
+
+let lambda = Partition::new(vec![2, 1])?;   // Err if not weakly decreasing
+assert_eq!(lambda.parts(), &amp;[2, 1]);
+assert_eq!(lambda.len(), 2);
+assert_eq!(lambda.size(), 3);               // |λ| — the codimension
+assert!(lambda.is_zero() == false);
+
+let zero = Partition::new(vec![0])?;
+assert!(zero.is_zero());
+
+assert!(lambda.fits_in(2, 2));              // valid position on Gr(2,4)
+assert!(!lambda.fits_in(2, 1));             // part 2 &gt; m = 1
+
+// Zero-padded comparison: [2] ≡ [2, 0].
+let short = Partition::new(vec![2])?;
+assert!(short.le_componentwise(&amp;lambda));
+assert!(lambda.le_componentwise(&amp;short));
+<span class="boring">}</span></code></pre>
+<h3 id="join_componentwise"><a class="header" href="#join_componentwise"><code>join_componentwise</code></a></h3>
+<p>The componentwise join λ∨μ (zero-padded) — the least upper bound in the
+componentwise order. Under the hood of the dictionary: Ω_λ ∩ Ω_μ =
+Ω_{λ∨μ}.</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let join = Partition::new(vec![2])?
+    .join_componentwise(&amp;Partition::new(vec![1, 1])?)?;
+assert_eq!(join, Partition::new(vec![2, 1])?);
+<span class="boring">}</span></code></pre>
+<h2 id="grassmannian"><a class="header" href="#grassmannian"><code>Grassmannian</code></a></h2>
+<p><code>Gr(k, k+m)</code> — the space of k-planes in (k+m)-space. The constructor
+validates <code>k ≥ 1, m ≥ 1</code>.</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use thatch::Grassmannian;
+
+let g = Grassmannian::new(2, 2)?;           // Gr(2,4) in the literature
+assert_eq!(g.partitions().len(), 6);        // all positions, descending lex
+assert!(g.contains(&amp;Partition::new(vec![2, 2])?));
+assert!(!g.contains(&amp;Partition::new(vec![3])?));
+<span class="boring">}</span></code></pre>
+<p>Each partition returned by <code>partitions()</code> is a full k-part vector.</p>
+<h2 id="strata"><a class="header" href="#strata"><code>strata</code></a></h2>
+<p>The boundary poset of Ω_λ:</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use thatch::{strata, Grassmannian, Partition};
+
+let g = Grassmannian::new(2, 2)?;
+let poset = strata(&amp;Partition::new(vec![2, 1])?, &amp;g)?;
+
+assert_eq!(poset.open_cell_dimension, 1);   // k·m − |λ| = 4 − 3
+assert_eq!(poset.boundary.len(), 1);        // the point Ω_(2,2)
+assert_eq!(poset.boundary[0].dimension, 0);
+assert_eq!(poset.boundary[0].codimension_in_variety, 1); // |μ| − |λ|
+assert!(poset.order.is_empty());            // one stratum: no pairs
+<span class="boring">}</span></code></pre>
+<h3 id="stratumposet-fields"><a class="header" href="#stratumposet-fields"><code>StratumPoset</code> fields</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Meaning</th></tr>
+</thead>
+<tbody>
+<tr><td><code>grassmannian</code></td><td>the ambient box</td></tr>
+<tr><td><code>variety</code></td><td>λ itself</td></tr>
+<tr><td><code>open_cell_dimension</code></td><td>`k·m −</td></tr>
+<tr><td><code>boundary</code></td><td><code>Vec&lt;Stratum&gt;</code> — μ &gt; λ ascending lexicographically</td></tr>
+<tr><td><code>order</code></td><td>closure pairs <code>(i, j)</code> with <code>boundary[i] ≤ boundary[j]</code></td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="errors"><a class="header" href="#errors">Errors</a></h3>
+<p><code>strata</code> returns <code>ThatchError::NotInBox</code> if λ is not a valid position on
+<code>g</code>. <code>Partition::new</code> returns <code>NotWeaklyDecreasing</code> for invalid input.
+Both are the only fallible constructors in the substrate — no panics
+anywhere in the crate.</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="the-ωstratum-dictionary"><a class="header" href="#the-ωstratum-dictionary">The Ω↔Stratum Dictionary</a></h1>
+<p>The S2 surface: the structured emptiness lattice and its dictionary to
+the stratum poset. See <a href="#ω-structured-emptiness">Ω: structured emptiness</a>
+for the mathematics.</p>
+<h2 id="omegavalue"><a class="header" href="#omegavalue"><code>OmegaValue</code></a></h2>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use thatch::OmegaValue;
+
+assert!(OmegaValue::StructuralZero.is_zero());
+assert!(OmegaValue::GeometricZero.is_zero());
+assert!(!OmegaValue::Positive.is_zero());
+assert!(!OmegaValue::Underdetermined.is_zero());
+<span class="boring">}</span></code></pre>
+<h2 id="pairing--closure-poset-position"><a class="header" href="#pairing--closure-poset-position"><code>pairing</code> — closure-poset position</a></h2>
+<p>Where does μ sit relative to λ?</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use thatch::{pairing, Pairing, Partition};
+
+let lambda = Partition::new(vec![1, 0])?;
+let mu = Partition::new(vec![2, 1])?;
+
+assert_eq!(pairing(&amp;lambda, &amp;mu), Pairing::Stricter);   // μ ≥ λ: X_μ ⊆ Ω_λ
+assert_eq!(pairing(&amp;mu, &amp;lambda), Pairing::Looser);
+assert_eq!(
+    pairing(&amp;Partition::new(vec![2, 0])?, &amp;Partition::new(vec![2])?),
+    Pairing::SameStratum                                       // zero-padded
+);
+assert_eq!(
+    pairing(&amp;Partition::new(vec![2, 0])?, &amp;Partition::new(vec![1, 1])?),
+    Pairing::Incomparable
+);
+<span class="boring">}</span></code></pre>
+<p><code>Stricter</code> means μ lies deeper in the closure order: μ satisfies λ’s
+condition <em>and more</em>.</p>
+<p>The function agrees exhaustively with <code>strata</code>: μ appears in the boundary
+of <code>strata(λ)</code> exactly when <code>pairing(λ, μ) = Stricter</code>.</p>
+<h2 id="omega_pair--the-compatibility-edge"><a class="header" href="#omega_pair--the-compatibility-edge"><code>omega_pair</code> — the compatibility edge</a></h2>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use thatch::{omega_pair, Grassmannian, Partition, OmegaValue};
+
+let g = Grassmannian::new(2, 2)?;
+assert_eq!(
+    omega_pair(&amp;g, &amp;Partition::new(vec![2, 1])?, &amp;Partition::new(vec![2, 1])?)?,
+    OmegaValue::Positive          // join (2,1) fits the box
+);
+assert_eq!(
+    omega_pair(&amp;g, &amp;Partition::new(vec![2, 2])?, &amp;Partition::new(vec![2, 1])?)?,
+    OmegaValue::Positive          // join (2,2) still fits
+);
+<span class="boring">}</span></code></pre>
+<p><code>StructuralZero</code> would require the join to leave the box. <code>GeometricZero</code>
+is unreachable for pairs (the meet is always a Schubert variety);
+<code>Underdetermined</code> is never returned — the dictionary is decidable.</p>
+<h2 id="omega_composition--the-composability-edge"><a class="header" href="#omega_composition--the-composability-edge"><code>omega_composition</code> — the composability edge</a></h2>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use thatch::{omega_composition, Grassmannian, Partition, OmegaValue};
+
+let g = Grassmannian::new(2, 2)?;
+// Budget k·m = 4: |(1,0)| + |(1,0)| = 2 — fine.
+assert_eq!(
+    omega_composition(&amp;g, &amp;Partition::new(vec![1, 0])?, &amp;Partition::new(vec![1, 0])?)?,
+    OmegaValue::Positive
+);
+// |(2,1)| + |(2,1)| = 6 &gt; 4 — overdrawn.
+assert_eq!(
+    omega_composition(&amp;g, &amp;Partition::new(vec![2, 1])?, &amp;Partition::new(vec![2, 1])?)?,
+    OmegaValue::StructuralZero
+);
+<span class="boring">}</span></code></pre>
+<h2 id="errors-1"><a class="header" href="#errors-1">Errors</a></h2>
+<p>Both <code>omega_*</code> functions validate their inputs against the box and return
+<code>ThatchError::NotInBox</code> (with the offending partition) otherwise.</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="basic-usage"><a class="header" href="#basic-usage">Basic Usage</a></h1>
+<p>A walkthrough of the two questions Thatch answers today, on Gr(2,4).</p>
+<h2 id="setup"><a class="header" href="#setup">Setup</a></h2>
+<pre class="playground"><code class="language-rust">use thatch::{Grassmannian, Partition, ThatchError};
+
+fn main() -&gt; Result&lt;(), ThatchError&gt; {
+    let g = Grassmannian::new(2, 2)?;   // Gr(2,4): the box is 2×2
+    Ok(())
+}</code></pre>
+<h2 id="question-1--what-is-the-boundary-of-ω_λ"><a class="header" href="#question-1--what-is-the-boundary-of-ω_λ">Question 1 — What is the boundary of Ω_λ?</a></h2>
+<p>Take λ = (1, 0) — codimension 1, a hypersurface:</p>
+<pre class="playground"><code class="language-rust">use thatch::{strata, Grassmannian, Partition};
+
+<span class="boring">fn main() -&gt; Result&lt;(), thatch::ThatchError&gt; {
+</span>let g = Grassmannian::new(2, 2)?;
+let lambda = Partition::new(vec![1, 0])?;
+let poset = strata(&amp;lambda, &amp;g)?;
+
+println!("Ω_(1,0) has open cell dimension {}", poset.open_cell_dimension);
+
+for b in &amp;poset.boundary {
+    println!(
+        "  X_{:?}: dim {}, codim {} in the variety",
+        b.partition.parts(), b.dimension, b.codimension_in_variety
+    );
+}
+<span class="boring">Ok(())
+</span><span class="boring">}</span></code></pre>
+<p>Output:</p>
+<pre><code class="language-text">Ω_(1,0) has open cell dimension 3
+  X_[1, 1]: dim 2, codim 1 in the variety
+  X_[2, 0]: dim 2, codim 1 in the variety
+  X_[2, 1]: dim 1, codim 2 in the variety
+  X_[2, 2]: dim 0, codim 3 in the variety
+</code></pre>
+<p>Four boundary strata, ascending lexicographically — the surface’s curve
+of degeneration, then its point.</p>
+<h2 id="question-2--do-two-positions-compose"><a class="header" href="#question-2--do-two-positions-compose">Question 2 — Do two positions compose?</a></h2>
+<p>The dictionary’s two edges, on λ = μ = (2, 1):</p>
+<pre class="playground"><code class="language-rust">use thatch::{
+    omega_composition, omega_pair, Grassmannian, OmegaValue, Partition,
+};
+
+<span class="boring">fn main() -&gt; Result&lt;(), thatch::ThatchError&gt; {
+</span>let g = Grassmannian::new(2, 2)?;
+let lambda = Partition::new(vec![2, 1])?;
+
+let meet = omega_pair(&amp;g, &amp;lambda, &amp;lambda)?;
+let product = omega_composition(&amp;g, &amp;lambda, &amp;lambda)?;
+
+println!("compatible:  {:?}", meet);      // Positive
+println!("composable:  {:?}", product);   // StructuralZero
+<span class="boring">assert_eq!(meet, OmegaValue::Positive);
+</span><span class="boring">assert_eq!(product, OmegaValue::StructuralZero);
+</span><span class="boring">Ok(())
+</span><span class="boring">}</span></code></pre>
+<p>The two positions coexist — yet their composition
+overdraws the LR budget (<code>|λ|+|μ| = 6 &gt; k·m = 4</code>). Compatibility and
+composability are independent edges; conflating them is the mistake the
+dictionary exists to prevent.</p>
+<h2 id="where-the-numbers-live"><a class="header" href="#where-the-numbers-live">Where the Numbers Live</a></h2>
+<p>Every fixture above is pinned in the test-suite (boundary counts per λ,
+the 36-pair exhaustive theorem check on Gr(2,4), the showcase pair) —
+what you read here is what the CI verifies.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr-ef4e11c1.min.js"></script>
+        <script src="mark-09e88c2c.min.js"></script>
+        <script src="searcher-c2a407aa.js"></script>
+
+        <script src="clipboard-1626706a.min.js"></script>
+        <script src="highlight-abc7f01d.js"></script>
+        <script src="book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+
+        <script>
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+
+
+    </div>
+    </body>
+</html>

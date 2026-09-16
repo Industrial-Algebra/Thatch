@@ -4,9 +4,9 @@ version = "0.1.0"
 edition = "2021"
 rust-version = "1.75"
 license = "Apache-2.0"
-description = "Geometry of the edge — the infinitesimal boundary between something and emptiness"
+description = "Stratum posets and intersection classification for Schubert varieties on Grassmannians"
 repository = "https://github.com/Industrial-Algebra/Thatch"
-keywords = ["mathematics", "geometry", "combinatorics", "log-geometry"]
+keywords = ["mathematics", "combinatorics", "partitions", "grassmannian"]
 categories = ["mathematics", "science"]
 
 [features]

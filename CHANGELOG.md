@@ -7,16 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.1.0] — Unreleased
 
-First published surface: the strata substrate (probe S0) and the
-Ω↔stratum dictionary (probe S2) of the founding document
-(`docs/ideation-edge-geometry.md`). Thatch is the geometry of the edge —
-the infinitesimal boundary between something and emptiness — with zero
-dependencies; arrows point away from Thatch.
+Initial release: stratum posets and intersection classification for
+Schubert varieties on Grassmannians, with zero dependencies.
 
 ### Added
 
-- **Strata substrate (S0)** — boundary-stratum posets of Schubert
-  varieties on Grassmannians:
+- **Strata substrate** — boundary-stratum posets of Schubert varieties
+  on Grassmannians:
   - `Partition` — codimension data with validation (`new`, `size`,
     `fits_in`, `le_componentwise` zero-padded comparison,
     `join_componentwise` λ∨μ added with S2).
@@ -28,8 +25,9 @@ dependencies; arrows point away from Thatch.
     (|μ| − |λ|), plus closure `order` pairs. Conventions: codim(Ω_λ)=|λ|,
     Ω_λ = ⊔_{μ≥λ} X_μ, boundary = strict upset, short-form λ treated
     zero-padded.
-- **Ω↔stratum dictionary (S2)** — the structured emptiness lattice
-  mirrored dependency-free and adjudicated against the poset:
+- **Intersection classification** — two deliberately separate
+  intersection questions, with the structured-emptiness lattice mirrored
+  dependency-free:
   - `OmegaValue` (`StructuralZero | GeometricZero | Positive |
     Underdetermined`) with `is_zero`.
   - `pairing(λ, μ)` — closure-poset position (`SameStratum | Stricter |
@@ -40,8 +38,8 @@ dependencies; arrows point away from Thatch.
     slot, never returned.
   - `omega_composition(g, λ, μ)` — the composability edge: structural
     zero iff |λ| + |μ| > k·m (the Littlewood–Richardson budget).
-  - **Headline**: compatibility and composability are independent edges —
-    λ = μ = (2,1) on Gr(2,4) has nonempty meet yet overdraws the budget.
+  - **Separation**: the two questions are independent — λ = μ = (2,1) on
+    Gr(2,4) has a nonempty meet yet overdraws the budget.
 - **CI** — GitHub Actions matrix on `develop`/`main` (fmt, clippy both
   configs, tests default + all-features, `--no-default-features` build
   check, docs with `-D warnings`); nightly toolchain pinned via
