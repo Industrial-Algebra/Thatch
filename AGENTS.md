@@ -1,25 +1,24 @@
 # Thatch — Agent Operating Map
 
-> **Geometry of the edge** — the infinitesimal boundary between something
-> and emptiness. Foundation crate in the IA "Rich Toolbox": Thatch depends
-> on **nothing** in the IA ecosystem; everyone may draw from Thatch.
+> A small zero-dependency Rust crate: combinatorial tools for Schubert
+> varieties on Grassmannians — stratum posets and intersection
+> classification. Thatch depends on **nothing** in the IA ecosystem.
 
-Founded from `docs/ideation-edge-geometry.md` (the founding document — read
-it first). The mathematics is at the ideation stage: **no implementation
-code before a probe survives**, and no public API before the first surviving
-probe produces one. TDD per `/skill:ia-coding-standards` applies from the
-first line of real code.
+The public repo stays **matter-of-fact**: it documents what the crate
+computes, not where it is going. Research direction, design rationale,
+and the founding documents live in private storage (IA-documents); do not
+surface them here without an explicit operator decision.
 
 ## Hard rules
 
 - **Gitflow** (`/skill:ia-gitflow`): `develop`/`main` receive changes only
   via merged PRs; every release is followed by a `main → develop` backmerge
-  **merge commit**. Until a remote exists, the founding commit on `main` is
-  the bootstrap; branch discipline starts with the first feature.
+  **merge commit**. Every change lands via branch + PR.
 - **Dependency direction**: no IA-ecosystem dependencies in `[dependencies]`
-  without an explicit decision recorded against the founding doc's §5
-  principles. Dev-dependencies for probes are fine.
+  — ever. Dev-dependencies are fine.
 - **License**: Apache-2.0 + two-line header on every `.rs` file.
+- **TDD** (`/skill:ia-coding-standards`): failing test first; every fixture
+  pinned by regression tests; no panics in library code.
 
 ## Verification
 
@@ -27,14 +26,18 @@ first line of real code.
 cargo fmt --all --check
 cargo clippy --all-targets --all-features -- -D warnings
 cargo test
-cargo doc --no-deps
+RUSTDOCFLAGS="-D warnings" cargo doc --all-features --no-deps
 ```
+
+CI (`.github/workflows/ci.yml`) mirrors this matrix on `develop`/`main`
+plus a `--no-default-features` build check. Toolchain: nightly, pinned in
+`rust-toolchain.toml`.
 
 ## Read-first routing
 
 | Task | Read |
 |---|---|
-| Why this crate exists; the math it draws on | `docs/ideation-edge-geometry.md` |
-| What to build next | probes S0–S3 (founding doc §7) |
+| What the crate computes | `src/strata.rs`, `src/dict.rs`, `book/src/` |
 | Conventions | `/skill:ia-coding-standards` |
-| Release mechanics (someday) | `/skill:ia-gitflow`, `/skill:ia-release-polish` |
+| Release mechanics | `/skill:ia-gitflow`, `/skill:ia-release-polish` |
+| Research direction (private) | IA-documents `Thatch/` |
