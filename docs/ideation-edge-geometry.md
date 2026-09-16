@@ -21,9 +21,8 @@
 >
 > **Cross-references:** Karpal `docs/design/structured-emptiness.md` (the Ω
 > thesis); Schubert Roadmap #17 / `analyze_composed_stability` + the
-> `wall_crossing_probe` baseline; Quantizon
-> `docs/structured-emptiness-for-diffusion-composition.md` (the gluing-failure
-> table); Minuet holographic stores; `amari-surreal::EpsilonPolynomial`.
+> `wall_crossing_probe` baseline; Minuet holographic stores;
+> `amari-surreal::EpsilonPolynomial`.
 
 ## 1. The thesis
 
@@ -44,7 +43,8 @@ Both stop at the boundary. Neither says what the boundary *is*.
 **Revision 2 addendum — four sides, not two.** The meeting is larger than
 two-sided. Karpal's Phase 16 topos work is building Ω into a **subobject
 classifier** — in topos theory, precisely the categorical interface between
-a subobject and its complement — and Quantizon's gluing-failure table is
+a subobject and its complement — and the gluing-failure analysis on the
+stack's composition side is
 **descent**: whether local boundary data composes to global data. The stack
 approaches the edge from four sides, one of which (the topos) is already
 far along building the general object. The honest restatement of §4: is
@@ -150,7 +150,6 @@ code.
 | **Karpal** | Ω lattice (`IntersectionKind`, `BoundedLattice`, `HeytingAlgebra`); Phase 16 topos work (subobject classifier, sheaves) | Ω types the kinds of emptiness; gluing failures happen at overlaps — i.e., at interfaces |
 | **Amari** | `WallCrossingEngine`, Schubert/enumerative core, tropical (`amari-tropical`), `EpsilonPolynomial` | The computational engine + the ε-quantities; skeletons as the combinatorial shadow |
 | **Minuet** | Holographic stores (Simple/Sharded), retrieval | The retrieval edge: the locus where a stored memory crosses below retrievability — a candidate wall in memory space |
-| **Quantizon** (private) | Structured-emptiness doc; the sheaf-gluing failure table | Its three failure modes (agree-but-contradictory / ill-posed overlap / ambiguous completion) are *instances* of boundary failure, awaiting a framework |
 
 The unification sensed at the origin is real: Ω gives the kinds,
 wall-crossing gives the dynamics, and the geometry of the interface is the
@@ -173,7 +172,7 @@ central open choice):
   in-stack-computable; least established as theory.
 - **(L3) Skeleton-first:** define the edge as the tropical skeleton of the
   something; study composition of skeletons along shared rays. Bridges to
-  Quantizon's tropical work; risks being *only* the shadow, not the edge.
+  the stack's tropical gluing work; risks being *only* the shadow, not the edge.
 
 Conjecture (marked as such): the right answer composes all three — the
 skeleton (L3) as the combinatorial shadow, the surreal thickening (L2) as its

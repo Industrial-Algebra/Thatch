@@ -25,8 +25,9 @@ sides.
    question is whether Thatch's geometry is a sibling or a stratified,
    ε-thickened instance of it.
 
-4. **Quantizon — descent.** The gluing-failure table asks whether local
-   boundary data composes to global data: descent for the edge.
+4. **Descent.** Whether local boundary data composes to global data —
+   gluing, on the composition side of the stack — is a fourth side of the
+   same edge.
 
 ## The Layered Reading
 
