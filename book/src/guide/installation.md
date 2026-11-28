@@ -5,14 +5,14 @@
 - Rust 1.75+ (the toolchain is pinned to nightly in-repo for development;
   the crate itself builds on stable)
 
-Thatch has **zero runtime dependencies** — `cargo add thatch` brings
+`thatch` depends only on `thatch-core`, which has no dependencies — `cargo add thatch` brings
 nothing else in.
 
 ## Adding to a Project
 
 ```toml
 [dependencies]
-thatch = "0.1"
+thatch = "0.2"
 ```
 
 Or:
@@ -26,9 +26,9 @@ cargo add thatch
 ```bash
 git clone https://github.com/Industrial-Algebra/Thatch
 cd Thatch
-cargo build          # default features
-cargo test           # 40 tests: strata fixtures + dictionary theorems
-cargo doc --open     # full API documentation
+cargo build --workspace   # default features, both crates
+cargo test --workspace   # strata fixtures, dictionary theorems, workspace-floor tests
+cargo doc --workspace --open   # full API documentation, both crates
 ```
 
 ## Feature Notes

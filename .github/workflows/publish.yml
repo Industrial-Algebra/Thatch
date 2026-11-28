@@ -5,14 +5,97 @@ on:
     tags:
       - 'v*'
 
+env:
+  CARGO_TERM_COLOR: never
+  CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN }}
+
 jobs:
-  publish:
+  publish-thatch-core:
+    name: Publish thatch-core
     runs-on: ubuntu-latest
+    outputs:
+      core: ${{ steps.version.outputs.core }}
     steps:
       - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@nightly
+      - name: Resolve version
+        id: version
+        run: |
+          echo "core=$(cargo metadata --no-deps --format-version 1 | jq -r '.packages[] | select(.name=="thatch-core") | .version')" >> "$GITHUB_OUTPUT"
+      - name: Publish unless this exact version is already on crates.io
+        run: |
+          if cargo info --registry crates-io "thatch-core@${{ steps.version.outputs.core }}" >/dev/null 2>/tmp/info.err; then
+            echo "thatch-core ${{ steps.version.outputs.core }} already published; skipping."
+          elif grep -q "could not find" /tmp/info.err; then
+            cargo publish -p thatch-core
+          else
+            echo "registry lookup failed:"; cat /tmp/info.err; exit 1
+          fi
 
-      - name: Install Rust nightly
-        uses: dtolnay/rust-toolchain@nightly
-
-      - name: Publish to crates.io
-        run: cargo publish --token ${{ secrets.CARGO_REGISTRY_TOKEN }}
+  publish-thatch:
+    name: Publish thatch
+    runs-on: ubuntu-latest
+    needs: publish-thatch-core
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@nightly
+      - name: Resolve version
+        id: version
+        run: |
+          echo "thatch=$(cargo metadata --no-deps --format-version 1 | jq -r '.packages[] | select(.name=="thatch") | .version')" >> "$GITHUB_OUTPUT"
+      - name: Wait until crates.io shows thatch-core (nominal 10 min wall-clock budget)
+        env:
+          LC_ALL: C
+        run: |
+          # Microsecond wall clock (bash >= 5). EPOCHREALTIME is wall-clock: an NTP
+          # step during the wait moves the budget — this is a nominal bound, not a
+          # monotonic one. The separator is normalised; LC_ALL=C pins it anyway.
+          now_us() { local t=$EPOCHREALTIME; now_us=${t//[.,]/}; }
+          fmt_s()  { printf '%d.%06d' $(( $1 / 1000000 )) $(( $1 % 1000000 )); }
+          now_us; deadline_us=$(( now_us + 600 * 1000000 ))
+          last=/tmp/poll.err; attempt=/tmp/poll-attempt.err; : > "$last"; status=none
+          report() {
+            echo "thatch-core@${{ needs.publish-thatch-core.outputs.core }} not visible on crates.io within the nominal 10 min; last lookup error:"
+            if [ -n "$(tr -d '[:space:]' < "$last")" ]; then cat "$last"; else echo "(no diagnostic captured; last lookup exit status: $status)"; fi
+            exit 1
+          }
+          while :; do
+            now_us; rem_us=$(( deadline_us - now_us ))
+            if (( rem_us <= 0 )); then report; fi
+            cargo info --registry crates-io "thatch-core@${{ needs.publish-thatch-core.outputs.core }}" >/dev/null 2>"$attempt" & pid=$!
+            # Timer in its own session so the parent can cancel it as a GROUP — no
+            # spawn window, no trap timing. It samples the clock itself, so dispatch
+            # delay BEFORE that sample is absorbed; the ensuing `sleep` is relative to
+            # the sample, so delay after it (e.g. a slow exec) is not.
+            # (A fresh bash: it inherits neither this step's functions nor its
+            # variables — the deadline is passed as an argument, the clock read inline.)
+            setsid bash -c 'r=$(( $2 - ${EPOCHREALTIME//[.,]/} )); (( r < 0 )) && r=0; sleep "$(printf "%d.%06d" $(( r / 1000000 )) $(( r % 1000000 )))"; kill -KILL "$1" 2>/dev/null' _ "$pid" "$deadline_us" >/dev/null 2>&1 & wd=$!
+            status=0; wait "$pid" || status=$?
+            # Take the first clock sample after `wait` returns the status: cleanup
+            # below may take time, and a success sampled inside the budget stays one.
+            now_us; observed_us=$now_us
+            # Cancel AND join the timer even if it has already fired and exited. PID
+            # first (a leader still exec'ing is stopped before it can set up), then the
+            # group again (in case it already has and forked its sleep).
+            kill -KILL "$wd" 2>/dev/null || true
+            kill -KILL -- "-$wd" 2>/dev/null || true
+            wait "$wd" 2>/dev/null || true
+            # Arbitrate on the latched sample, before any diagnostic work.
+            if (( status == 0 )) && (( deadline_us - observed_us > 0 )); then exit 0; fi
+            if [ -n "$(tr -d '[:space:]' < "$attempt")" ]; then cp "$attempt" "$last"; fi
+            now_us; rem_us=$(( deadline_us - now_us ))
+            if (( rem_us <= 0 )); then report; fi
+            budget_us=$rem_us                      # the true remaining budget, for the log
+            if (( rem_us > 30 * 1000000 )); then rem_us=$(( 30 * 1000000 )); fi
+            echo "not yet visible; retrying in $(fmt_s "$rem_us")s ($(( budget_us / 1000000 ))s of budget left)"
+            sleep "$(fmt_s "$rem_us")"
+          done
+      - name: Publish unless this exact version is already on crates.io
+        run: |
+          if cargo info --registry crates-io "thatch@${{ steps.version.outputs.thatch }}" >/dev/null 2>/tmp/info.err; then
+            echo "thatch ${{ steps.version.outputs.thatch }} already published; skipping."
+          elif grep -q "could not find" /tmp/info.err; then
+            cargo publish -p thatch
+          else
+            echo "registry lookup failed:"; cat /tmp/info.err; exit 1
+          fi

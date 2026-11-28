@@ -34,7 +34,7 @@ impl Grassmannian {
     /// # Examples
     ///
     /// ```
-    /// use thatch::Grassmannian;
+    /// use thatch_core::Grassmannian;
     ///
     /// let gr = Grassmannian::new(2, 2).expect("valid");
     /// assert_eq!(gr.partitions().len(), 6);

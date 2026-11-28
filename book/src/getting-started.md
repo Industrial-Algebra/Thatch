@@ -1,12 +1,12 @@
 # Getting Started
 
-Thatch has **zero dependencies** — add it and use it.
+Thatch depends only on `thatch-core`, which has no dependencies — add it and use it.
 
 ## Install
 
 ```toml
 [dependencies]
-thatch = "0.1"
+thatch = "0.2"
 ```
 
 ## First Boundary

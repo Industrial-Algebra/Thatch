@@ -40,7 +40,7 @@ pub struct StratumPoset {
 /// # Examples
 ///
 /// ```
-/// use thatch::{strata, Grassmannian, Partition};
+/// use thatch_core::{strata, Grassmannian, Partition};
 ///
 /// let gr = Grassmannian::new(2, 2).expect("valid"); // Gr(2,4)
 /// let lambda = Partition::new(vec![2, 1]).expect("valid");

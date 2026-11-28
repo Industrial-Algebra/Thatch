@@ -13,7 +13,7 @@ use crate::error::ThatchError;
 /// # Examples
 ///
 /// ```
-/// use thatch::Partition;
+/// use thatch_core::Partition;
 ///
 /// let lambda = Partition::new(vec![2, 1]).expect("valid");
 /// assert_eq!(lambda.parts(), &[2, 1]);
@@ -84,12 +84,12 @@ impl Partition {
     /// # Examples
     ///
     /// ```
-    /// use thatch::Partition;
+    /// use thatch_core::Partition;
     ///
     /// let join = Partition::new(vec![2])?
     ///     .join_componentwise(&Partition::new(vec![1, 1])?)?;
     /// assert_eq!(join, Partition::new(vec![2, 1])?);
-    /// # Ok::<(), thatch::ThatchError>(())
+    /// # Ok::<(), thatch_core::ThatchError>(())
     /// ```
     ///
     /// # Errors

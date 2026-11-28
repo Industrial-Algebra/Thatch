@@ -2,7 +2,8 @@
 
 **Thatch** is a small Rust library of combinatorial tools for Schubert
 varieties on Grassmannians: stratum posets and intersection
-classification, with zero dependencies.
+classification. The `thatch` crate depends only on `thatch-core`, which
+has no dependencies.
 
 ## What It Does
 
@@ -22,7 +23,7 @@ question it is answering.
 
 ## Design Notes
 
-- **Zero dependencies.** Everything is decided combinatorially from the
+- **No dependencies in the mathematics.** Everything is decided combinatorially from the
   componentwise order on box partitions — no limits, no cohomology
   machinery, no sheaves.
 - **No panics.** Fallible constructors return `Result`; lookups are
