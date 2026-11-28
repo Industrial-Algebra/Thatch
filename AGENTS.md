@@ -1,6 +1,7 @@
 # Thatch — Agent Operating Map
 
-> A small zero-dependency Rust crate: combinatorial tools for Schubert
+> A small Rust workspace — `thatch-core`, a zero-dependency crate, under
+> the `thatch` umbrella: combinatorial tools for Schubert
 > varieties on Grassmannians — stratum posets and intersection
 > classification. Thatch depends on **nothing** in the IA ecosystem.
 
@@ -18,7 +19,8 @@ surface them here without an explicit operator decision.
   backmerge alike. Agents author, verify, and hand off at the merge
   (ia-gitflow Rule 4, standing since 2026-09-16).
 - **Dependency direction**: no IA-ecosystem dependencies in `[dependencies]`
-  — ever. Dev-dependencies are fine.
+  — ever. Dev-dependencies are fine. `thatch-core`'s `[dependencies]` is
+  empty, enforced by the `floor` test in `thatch-core/src/lib.rs`.
 - **License**: Apache-2.0 + two-line header on every `.rs` file.
 - **TDD** (`/skill:ia-coding-standards`): failing test first; every fixture
   pinned by regression tests; no panics in library code.
@@ -27,20 +29,22 @@ surface them here without an explicit operator decision.
 
 ```bash
 cargo fmt --all --check
-cargo clippy --all-targets --all-features -- -D warnings
-cargo test
-RUSTDOCFLAGS="-D warnings" cargo doc --all-features --no-deps
+cargo clippy --workspace --all-targets --all-features -- -D warnings
+cargo test --workspace
+RUSTDOCFLAGS="-D warnings" cargo doc --workspace --all-features --no-deps
 ```
 
 CI (`.github/workflows/ci.yml`) mirrors this matrix on `develop`/`main`
-plus a `--no-default-features` build check. Toolchain: nightly, pinned in
-`rust-toolchain.toml`.
+plus a `cargo check --workspace --no-default-features` build check.
+Package-scoped CI gates use `--workspace` (formatting uses `--all`);
+publish is two ordered jobs (`thatch-core`, then `thatch`). Toolchain:
+nightly, pinned in `rust-toolchain.toml`.
 
 ## Read-first routing
 
 | Task | Read |
 |---|---|
-| What the crate computes | `src/strata.rs`, `src/dict.rs`, `book/src/` |
+| What the crate computes | `thatch-core/src/strata.rs`, `thatch-core/src/dict.rs`, `book/src/` |
 | Conventions | `/skill:ia-coding-standards` |
 | Release mechanics | `/skill:ia-gitflow`, `/skill:ia-release-polish` |
 | Research direction (private) | IA-documents `Thatch/` |

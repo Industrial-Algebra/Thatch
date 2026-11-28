@@ -13,7 +13,15 @@ posets and intersection classification.
   budget |λ| + |μ| ≤ k·m hold?), plus `pairing` for the closure-poset
   relation between two positions.
 
-Zero dependencies. TDD throughout — every fixture is regression-tested.
+One dependency — `thatch-core`, which has none (an empty `[dependencies]`,
+enforced by a test). TDD throughout — every fixture is regression-tested.
+
+## Layout
+
+Thatch is a Cargo workspace. `thatch` is the umbrella you depend on;
+`thatch-core` is the zero-dependency substrate it re-exports in full.
+Every item and module path is available from the umbrella —
+`use thatch::…` is the supported import, unchanged since 0.1.
 
 ## Quick Start
 

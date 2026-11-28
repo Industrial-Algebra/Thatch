@@ -1,0 +1,20 @@
+[package]
+name = "thatch-core"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+description = "Stratum posets and intersection classification for Schubert varieties on Grassmannians"
+repository = "https://github.com/Industrial-Algebra/Thatch"
+keywords = ["mathematics", "combinatorics", "partitions", "grassmannian"]
+categories = ["mathematics", "science"]
+
+[features]
+default = ["std"]
+std = []
+
+# Intentionally empty — thatch-core is the zero-dependency floor of the
+# workspace (AGENTS.md "Dependency direction"). Enforced by
+# floor::has_no_normal_dependencies in src/lib.rs, which asks Cargo for
+# the resolved normal-dependency graph across all targets.
+[dependencies]

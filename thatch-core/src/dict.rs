@@ -40,7 +40,7 @@
 //! # Examples
 //!
 //! ```
-//! use thatch::{omega_composition, omega_pair, Grassmannian, Partition};
+//! use thatch_core::{omega_composition, omega_pair, Grassmannian, Partition};
 //!
 //! // Gr(2,4): ambient 4, box 2x2.
 //! let g = Grassmannian::new(2, 2)?;
@@ -48,13 +48,13 @@
 //! let mu = Partition::new(vec![2, 1])?;
 //!
 //! // Compatible: the varieties meet (join (2,1) fits the box)...
-//! assert_eq!(omega_pair(&g, &lambda, &mu)?, thatch::OmegaValue::Positive);
+//! assert_eq!(omega_pair(&g, &lambda, &mu)?, thatch_core::OmegaValue::Positive);
 //! // ...yet impossible to compose: |λ|+|μ| = 6 > k·m = 4.
 //! assert_eq!(
 //!     omega_composition(&g, &lambda, &mu)?,
-//!     thatch::OmegaValue::StructuralZero
+//!     thatch_core::OmegaValue::StructuralZero
 //! );
-//! # Ok::<(), thatch::ThatchError>(())
+//! # Ok::<(), thatch_core::ThatchError>(())
 //! ```
 
 use crate::error::ThatchError;
@@ -111,7 +111,7 @@ impl OmegaValue {
 /// # Examples
 ///
 /// ```
-/// use thatch::{Pairing, Partition, pairing};
+/// use thatch_core::{Pairing, Partition, pairing};
 ///
 /// let lambda = Partition::new(vec![1, 0])?;
 /// let mu = Partition::new(vec![2, 1])?;
@@ -121,7 +121,7 @@ impl OmegaValue {
 ///     pairing(&Partition::new(vec![2, 0])?, &Partition::new(vec![2])?),
 ///     Pairing::SameStratum
 /// );
-/// # Ok::<(), thatch::ThatchError>(())
+/// # Ok::<(), thatch_core::ThatchError>(())
 /// ```
 pub fn pairing(lambda: &Partition, mu: &Partition) -> Pairing {
     let le = lambda.le_componentwise(mu);

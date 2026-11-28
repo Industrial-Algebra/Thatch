@@ -5,7 +5,7 @@ Thatch follows the ecosystem doctrine: **features are additive only** —
 
 | Feature | Default | Effect |
 |---|---|---|
-| `std` | ✓ | Conventional ecosystem flag; currently inert — the crate uses `std` unconditionally |
+| `std` | ✓ | Conventional ecosystem flag; currently inert — the crate uses `std` unconditionally; on the umbrella it forwards to `thatch-core/std` |
 
 ## The `std` Story
 
@@ -23,8 +23,8 @@ CI (`.github/workflows/ci.yml`) runs, on every PR and push to
 `develop`/`main`:
 
 - `cargo fmt --all --check`
-- `cargo clippy --all-targets` with `-D warnings`, in both the default
+- `cargo clippy --workspace --all-targets` with `-D warnings`, in both the default
   and all-features configurations
-- `cargo test` in the default and all-features configurations
-- `cargo check --no-default-features` (the honest-build assertion)
-- `cargo doc --all-features --no-deps` with `RUSTDOCFLAGS=-D warnings`
+- `cargo test --workspace` in the default and all-features configurations
+- `cargo check --workspace --no-default-features` (the honest-build assertion, every crate)
+- `cargo doc --workspace --all-features --no-deps` with `RUSTDOCFLAGS=-D warnings`

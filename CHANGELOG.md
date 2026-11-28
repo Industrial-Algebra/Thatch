@@ -5,6 +5,27 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.0] — Unreleased
+
+### Changed
+
+- **Workspace split.** `thatch` is now an umbrella over
+  [`thatch-core`](https://crates.io/crates/thatch-core): today's crate,
+  moved verbatim, with an **empty `[dependencies]`** enforced by a unit
+  test. The public API is unchanged — every item and every module path
+  (`thatch::dict::OmegaValue` included) resolves to the same item from
+  the umbrella, and the downstream seam `use thatch::OmegaValue;` is
+  pinned by a test.
+- CI runs the package-scoped gates `--workspace` (without it, the
+  core's tests would silently drop out of CI); crates publish in order
+  — `thatch-core`, then `thatch` — checking the exact version on
+  crates.io so a rerun never double-uploads.
+
+### Added
+
+- `thatch-core` on crates.io — the dependency-free floor of the
+  workspace. Depend on `thatch`; `thatch-core` exists for the umbrella.
+
 ## [0.1.0] — 2026-09-15
 
 Initial release: stratum posets and intersection classification for

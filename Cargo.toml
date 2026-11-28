@@ -1,18 +1,33 @@
 [package]
 name = "thatch"
-version = "0.1.0"
-edition = "2021"
-rust-version = "1.75"
-license = "Apache-2.0"
-description = "Stratum posets and intersection classification for Schubert varieties on Grassmannians"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+description = "Combinatorial tools for Schubert varieties on Grassmannians: stratum posets and intersection classification"
 repository = "https://github.com/Industrial-Algebra/Thatch"
 keywords = ["mathematics", "combinatorics", "partitions", "grassmannian"]
 categories = ["mathematics", "science"]
 
 [features]
 default = ["std"]
-std = []
+std = ["thatch-core/std"]
 
 [dependencies]
+# `default-features = false`: core's `std` is reached ONLY through this
+# crate's `std` feature, so `--no-default-features` on the umbrella
+# disables it on the core too.
+thatch-core = { version = "0.2.0", path = "thatch-core", default-features = false }
 
-[dev-dependencies]
+[workspace]
+members = ["thatch-core"]
+# Load-bearing: under resolver 1, `cargo check --workspace
+# --no-default-features` is accepted but keeps the core's default
+# features; resolvers 2 and 3 disable them. Do not remove.
+resolver = "2"
+
+[workspace.package]
+version = "0.2.0"
+edition = "2021"
+rust-version = "1.75"
+license = "Apache-2.0"

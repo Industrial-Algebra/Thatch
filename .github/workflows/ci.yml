@@ -22,6 +22,14 @@ jobs:
       - name: Check formatting
         run: cargo fmt --all --check
 
+  license:
+    name: License copies agree
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: thatch-core/LICENSE must equal the root LICENSE
+        run: cmp LICENSE thatch-core/LICENSE
+
   clippy:
     name: Clippy
     runs-on: ubuntu-latest
@@ -31,10 +39,10 @@ jobs:
         with:
           components: clippy
       - uses: Swatinem/rust-cache@v2
-      - name: Run clippy (default features)
-        run: cargo clippy --all-targets -- -D warnings
-      - name: Run clippy (all features)
-        run: cargo clippy --all-targets --all-features -- -D warnings
+      - name: Run clippy (workspace, default features)
+        run: cargo clippy --workspace --all-targets -- -D warnings
+      - name: Run clippy (workspace, all features)
+        run: cargo clippy --workspace --all-targets --all-features -- -D warnings
 
   test:
     name: Test
@@ -47,10 +55,17 @@ jobs:
       - uses: dtolnay/rust-toolchain@nightly
       - uses: Swatinem/rust-cache@v2
       - name: Run tests ${{ matrix.features }}
-        run: cargo test ${{ matrix.features }}
-      - name: Check no-default-features build
+        run: cargo test --workspace ${{ matrix.features }}
+      - name: Check no-default-features build (every crate)
         if: matrix.features == ''
-        run: cargo check --no-default-features
+        run: cargo check --workspace --no-default-features
+      - name: thatch-core declares no normal dependencies (declaration-authoritative)
+        if: matrix.features == ''
+        run: |
+          COUNT=$(cargo metadata --no-deps --format-version 1 \
+            | jq '.packages[] | select(.name=="thatch-core") | .dependencies | map(select(.kind == null)) | length')
+          echo "thatch-core normal dependency declarations: $COUNT"
+          test "$COUNT" = "0"
 
   doc:
     name: Documentation
@@ -60,6 +75,6 @@ jobs:
       - uses: dtolnay/rust-toolchain@nightly
       - uses: Swatinem/rust-cache@v2
       - name: Build docs
-        run: cargo doc --all-features --no-deps
+        run: cargo doc --workspace --all-features --no-deps
         env:
           RUSTDOCFLAGS: -D warnings
